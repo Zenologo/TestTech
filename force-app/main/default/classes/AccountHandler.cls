@@ -34,7 +34,6 @@ public with sharing class AccountHandler {
                 mapContactAccount.put(relation.ContactId, new List<Id>{relation.AccountId});
             }
         }
-        System.debug(mapContactAccount);
         return mapContactAccount;
     }
     
@@ -75,7 +74,7 @@ public with sharing class AccountHandler {
         // Get all active contacts related to the account
         List<Contact> lstContact = [SELECT Id FROM Contact WHERE AccountId IN :setAccId AND IsActive__c = true];
         if (lstContact.isEmpty()){
-            System.debug('There is not related contact');
+            System.debug(LoggingLevel.WARN, 'There is not related contact');
             return new List<Id>();
         }
 
